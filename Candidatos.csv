@@ -1,4 +1,5 @@
-Nome; Número; Cargo; Vice
-João Pedro; 51; Presidente; Pedrinho
-Maria; 29; Presidente; Guilherme
-Vera; 74; Presidente; Roberta
+Nome,Número,Cargo,Vice
+João Pedro,51,Presidente,Pedrinho
+Maria, 29,Presidente,Guilherme
+Vera,74,Presidente,Roberta
+Vinicius Medeiros,898234,Santos/SP,13/09/2005

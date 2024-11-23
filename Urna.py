@@ -1,12 +1,9 @@
 from CriarTela import *
 
-class Urna(CriarTela):
-    
+class Urna(CriarTela, Botoes):
     def __init__(self, root):
         super().__init__(root)
-
-        self.label_titulo = ttk.Label(self.frm, text="Urna")
-        self.label_titulo.grid(column=0, row=0, columnspan=3, pady=10)
+        self.voto = []
 
     def adcionarVoto(self, num):
         if len(self.voto) < 2:  
@@ -26,5 +23,5 @@ class Urna(CriarTela):
         self.label_resultado.config(text="Voto corrigido, digite novamente.")
 
 root = Tk()
-app = CriarTela(root)
+app = Urna(root)
 root.mainloop()
