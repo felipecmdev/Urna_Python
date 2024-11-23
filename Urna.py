@@ -1,6 +1,7 @@
 import csv
 from CriarTela import *
 from Eleitor import *
+from Candidato import *
 
 class Urna(CriarTela):
     eleitores = []
@@ -13,9 +14,8 @@ class Urna(CriarTela):
         self.label_titulo.grid(column=0, row=0, columnspan=3, pady=10)
         eleitores = self.carregar_csv("Eleitores.csv")
         self.eleitores = [Eleitor(int(eleitor['Titulo']), eleitor['Nome'], eleitor['Municipio/UF'], eleitor['dataN']) for eleitor in eleitores]
-        # candidatos = self.carregar_csv("Candidatos.csv")
-        # self.candidatos = [Candidato(int(candidato['Numero']), candidato['Nome'], candidato['Partido'], candidato['Cargo']) for candidato in candidatos]
-        
+        candidatos = self.carregar_csv("Candidatos.csv")
+        self.candidatos = [Candidato(int(candidato['Numero']), candidato['Nome'], candidato['Cargo'], candidato['Vice']) for candidato in candidatos]
 
     def carregar_csv(self, arquivo):
         dados = []
