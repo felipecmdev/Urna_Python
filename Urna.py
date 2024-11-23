@@ -1,14 +1,31 @@
+import csv
 from CriarTela import *
+from Eleitor import *
 
 class Urna(CriarTela):
-    
+    eleitores = []
+    candidatos = []
+
     def __init__(self, root):
         super().__init__(root)
 
         self.label_titulo = ttk.Label(self.frm, text="Urna")
         self.label_titulo.grid(column=0, row=0, columnspan=3, pady=10)
+        eleitores = self.carregar_csv("Eleitores.csv")
+        self.eleitores = [Eleitor(int(eleitor['Titulo']), eleitor['Nome'], eleitor['Municipio/UF'], eleitor['dataN']) for eleitor in eleitores]
+        # candidatos = self.carregar_csv("Candidatos.csv")
+        # self.candidatos = [Candidato(int(candidato['Numero']), candidato['Nome'], candidato['Partido'], candidato['Cargo']) for candidato in candidatos]
+        
 
-    def adcionarVoto(self, num):
+    def carregar_csv(self, arquivo):
+        dados = []
+        with open(arquivo, mode='r', encoding='utf-8') as csvfile:
+            leitor = csv.DictReader(csvfile)  # Usa o cabeçalho como chaves
+            for linha in leitor:
+                dados.append(linha)
+        return dados
+
+    def adicionarVoto(self, num):
         if len(self.voto) < 2:  
             self.voto.append(num)
 
@@ -26,5 +43,5 @@ class Urna(CriarTela):
         self.label_resultado.config(text="Voto corrigido, digite novamente.")
 
 root = Tk()
-app = CriarTela(root)
+app = Urna(root)
 root.mainloop()
