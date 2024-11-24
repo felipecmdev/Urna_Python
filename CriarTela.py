@@ -15,5 +15,5 @@ class CriarTela(Botoes):
 
         self.criarBotoes()
 
-        self.label_resultado = ttk.Label(self.frm, text="")
+        self.label_resultado = ttk.Label(self.frm, text="Por favor se indentifique com o seu título")
         self.label_resultado.grid(column=0, row=7, columnspan=3, pady=10)
