@@ -1,20 +1,20 @@
 class Candidato:
-    numero : int
-    nome : str
-    votos : int
-    cargo : str
-    vice : str
+    Numero : int
+    Nome : str
+    Votos : int
+    Cargo : str
+    Vice : str
 
     def __init__(self, numero, nome, cargo, vice):
-        self.numero = numero
-        self.nome = nome
-        self.votos = 0
-        self.cargo = cargo
-        self.vice = vice
+        self.Numero = numero
+        self.Nome = nome
+        self.Votos = 0
+        self.Cargo = cargo
+        self.Vice = vice
 
     def registrarVoto(self):
-        self.votos += 1
+        self.Votos += 1
 
     def __str__(self):
-        return f'{self.numero} - {self.nome}'
+        return f'{self.Numero} - {self.Nome}'
         

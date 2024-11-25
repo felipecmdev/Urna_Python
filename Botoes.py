@@ -27,6 +27,10 @@ class Botoes():
     def numeros(self, n):
         self.voto.append(n)
         self.label_resultado.config(text=f"Você digitou: {''.join(map(str, self.voto))}")
+        self.botaoPressionado()
+    
+    def botaoPressionado(self, numero):
+        pass
 
     def botaoConfirma(self):
         pass
