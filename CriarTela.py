@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from Botoes import *
 
+# Classe para a criação e configuração da tela interativa da urna
 class CriarTela(Botoes):
     def __init__(self, root):                                                              
         self.root = root

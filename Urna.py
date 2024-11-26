@@ -5,11 +5,13 @@ from Candidato import *
 import os
 import pickle
 
+# Classe que representa a urna eletrônica e suas funcionalidades
 class Urna(CriarTela):
     eleitores = []
     candidatos = []
     votoBranco : int
 
+#Construtor da classe Urna, inicializa a interface gráfica e carrega os dados dos eleitores e candidatos.
     def __init__(self, root):
         self.cadastroRealizado = False
         super().__init__(root)
@@ -21,6 +23,7 @@ class Urna(CriarTela):
         candidatos = self.carregar_csv("Candidatos.csv")
         self.candidatos = [Candidato(int(candidato['Numero']), candidato['Nome'], candidato['Cargo'], candidato['Vice']) for candidato in candidatos]
 
+# Método que lê os dados de um arquivo CSV e retorna uma lista de dicionários com os dados
     def carregar_csv(self, arquivo):
         dados = []
         with open(arquivo, mode='r', encoding='utf-8') as csvfile:
@@ -29,6 +32,7 @@ class Urna(CriarTela):
                 dados.append(linha)
         return dados
     
+# Método para exibir informações de um candidato baseado no número digitado  
     def candidatoInfo(self):
         votoDigitado = int("".join(map(str, self.voto)))  
         candidato_encontrado = next((candidato for candidato in self.candidatos if candidato.Numero == votoDigitado), None)
@@ -43,6 +47,7 @@ class Urna(CriarTela):
             self.label_resultado.config(text="Candidato não encontrado. Digite novamente.")
             self.voto.clear()
 
+# Método de verificação e autenticação do título de eleitor digitado
     def eleitorInfo(self):
         if len(self.voto) == 5:  
             titulo_digitado = int("".join(map(str, self.voto)))  
@@ -63,12 +68,14 @@ class Urna(CriarTela):
         else:
              self.label_resultado.config(text="Título precisa ter 5 números. Digite novamente.")
              self.voto.clear()
-
+ 
+# Realiza ações quando um botão numérico é pressionado
     def botaoPressionado(self):
         if self.cadastroRealizado:
             if len(self.voto) == 2:
                 self.candidatoInfo()            
 
+# Confirma o voto e registra o candidato escolhido
     def botaoConfirma(self):
         if self.cadastroRealizado:
             if len(self.voto) == 2:
@@ -95,6 +102,7 @@ class Urna(CriarTela):
         else:
             self.eleitorInfo()
 
+# Salva o voto em um arquivo utilizando pickle
     def salvarVoto(self, voto):
         pasta_documentos = os.path.expanduser("~/Documents")
         caminho_arquivo = os.path.join(pasta_documentos, "votos.pckl")
@@ -123,6 +131,7 @@ class Urna(CriarTela):
 
         print(f"Voto salvo com sucesso em {caminho_arquivo}")
 
+# Método para exibir os resultados da votação
     def exibirResultados(self):
         pasta_documentos = os.path.expanduser("~/Documents")
         caminho_arquivo = os.path.join(pasta_documentos, "votos.pckl")
@@ -162,7 +171,7 @@ class Urna(CriarTela):
 
 
              
-
+# Método para registrar um voto em branco
     def botaoBranco(self):
         if self.cadastroRealizado:
             self.votoBranco += 1
@@ -172,10 +181,12 @@ class Urna(CriarTela):
             self.label_resultado.config(text="Título não encontrado. Digite novamente.") 
         self.cadastroRealizado = False 
 
+# Limpa o voto digitado
     def botaoCorrigir(self):
         self.voto.clear()
         self.label_resultado.config(text="")
 
+# Configura a aplicação Tkinter
 root = Tk()
 app = Urna(root)
 root.mainloop()
